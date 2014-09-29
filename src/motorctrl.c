@@ -70,8 +70,8 @@ void motor_order(int mtype,int ctrl,int param1,int param2)
 		default:
 		motor_stop(0);
 		motor_stop(1);
-		break
-		}	
+		break;
+		};	
 	}
 void motor_stop(int ctrl)
 {

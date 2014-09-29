@@ -33,23 +33,29 @@
 #include <wiringPi.h>
 #include <mcp23017.h>
 
+#include "sdi_coref.h"
+
 #define BASE_I2C        456
+
+short int immediatestop=0;
 
 
 PI_THREAD (matrixUpdater)
 {
-  int i ;
+  long i ;
 
   printf("PI_THREAD enter\n");
   piHiPri (50) ;
 
-  for (i=0;i<1000;i++)
+  for (i=0;i<1000000L;i++)
   {
    
-           printf("PI_THREAD work\n");
+           printf("PI_THREAD work %l\n",i);
           delayMicroseconds (50) ;
+          if(i>10){immediatestop=1;break;}
        
   }
+  printf("PI_THREAD success\n");
 
   return NULL ;
 }
@@ -85,7 +91,11 @@ int main(int argc, char **argv)
   }
   
     piThreadCreate (matrixUpdater) ;
-     while(getchar()!=32);
+    piThreadCreate (matrixUpdater) ;
+    
+    coref_start(argc, argv);
+    
+     while(/*getchar()!=32&&*/immediatestop==0);
 	release_config(&cfg);
 	return 0;
 }
