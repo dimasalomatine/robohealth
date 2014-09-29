@@ -1,6 +1,6 @@
 
 /*
- * untitled.c
+ * sdisys.c
  * 
  * Copyright 2014 dima <dima@debian>
  * 
