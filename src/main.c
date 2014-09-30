@@ -42,20 +42,21 @@ short int immediatestop=0;
 
 PI_THREAD (matrixUpdater)
 {
-  long i ;
+  int i ;
 
-  printf("PI_THREAD enter\n");
+  printf("PI_THREAD enter %ld\n",pthread_self());
   piHiPri (50) ;
 
-  for (i=0;i<1000000L;i++)
+  for (i=0;i<100;i++)
   {
    
-           printf("PI_THREAD work %l\n",i);
-          delayMicroseconds (50) ;
-          if(i>10){immediatestop=1;break;}
+          printf("PI_THREAD work%ld result i= %d\n",pthread_self(),i);
+          //delayMicroseconds (50) ;
+          sleep(1);
+          if(i>50){immediatestop=1;break;}
        
   }
-  printf("PI_THREAD success\n");
+  printf("PI_THREAD success %ld\n",pthread_self());
 
   return NULL ;
 }
@@ -90,12 +91,15 @@ int main(int argc, char **argv)
         delay (1) ;
   }
   
-    piThreadCreate (matrixUpdater) ;
-    piThreadCreate (matrixUpdater) ;
-    
     coref_start(argc, argv);
     
+    piThreadCreate (matrixUpdater) ;
+    //piThreadCreate (matrixUpdater) ;
+    
+    coref_join(argc, argv);
+    
      while(/*getchar()!=32&&*/immediatestop==0);
+     globalwork=FALSE;
 	release_config(&cfg);
 	return 0;
 }
