@@ -28,7 +28,7 @@ void init_config(cfg_dt *a)
 {
 	a->logfile=NULL;
 	a->log_level=3;
-	a->itype=3;
+	a->itype=1;
 	a->use_exit_critical_function=0;
 	}
 

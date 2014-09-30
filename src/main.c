@@ -78,12 +78,16 @@ int main(int argc, char **argv)
      }
      else if(cfg.itype!=3)
      {
+		 printf("init base\n.............................++++++++++++++");
 	
 	  mcp23017Setup (BASE_I2C, 0x20) ;
 	  
 	
 	// For the push button to stop it...
 
+  pinMode         (BASE_I2C + 15, OUTPUT) ;
+  digitalWrite(BASE_I2C + 15, HIGH);
+  sleep(1);
   pinMode         (BASE_I2C + 15, INPUT) ;
   pullUpDnControl (BASE_I2C + 15, PUD_UP) ;
   

@@ -70,19 +70,19 @@ void * th_video_in_m_process()
                 printf("capturing video...\n");
                 //
                 //sprintf(cmd, "/bin/ls -l");
-                sprintf(cmd, "raspistill -t 100 -w 1920 -h 1080 -q 90 -o /tmpimg/currcap.jpg");
+                sprintf(cmd, "raspistill -t 100 -w 1920 -h 1080 -q 90 -o /home/pi/rha/tmpimg/currcap.jpg");
                 res=system(cmd);
                 fprintf(stdout,"execution returned %d.\n",res);
                 if ((-1 != res) && (0 != res)){
                  fprintf(stdout,"now would be a good time to check out what the resulting return-value (%d) means.\n",res);
                 }else{
-	                  sprintf(cmd, "cp /tmpimg/currcap.jpg /tmpimg/currinproc.jpg");
+	                  sprintf(cmd, "cp /home/pi/rha/tmpimg/currcap.jpg /home/pi/rha/tmpimg/currinproc.jpg");
                       res=system(cmd);
                       fprintf(stdout,"execution returned %d.\n",res);
                       if ((-1 != res) && (0 != res)){
                         fprintf(stdout,"now would be a good time to check out what the resulting return-value (%d) means.\n",res);
                       }else{
-	                        fprintf("capture ok going to proccess opencv...\n");
+	                        fprintf(stdout,"capture ok going to proccess opencv...\n");
 	                        //here begin 1
 	                        //here end 1
 	                       }
